@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\card.png" />
+    <None Remove="Images\credit-card.png" />
+    <None Remove="Images\password.png" />
+    <None Remove="Images\pin.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CashDispenserLibrary\CashDispenserLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\card.png" />
+    <Resource Include="Images\pin.png" />
+  </ItemGroup>
+
+</Project>

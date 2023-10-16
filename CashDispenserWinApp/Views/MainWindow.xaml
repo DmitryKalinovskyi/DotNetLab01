@@ -1,0 +1,45 @@
+﻿<Window x:Class="CashDispenserWinApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CashDispenserWinApp"
+        mc:Ignorable="d"
+        Title="Login" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                <GradientStop Color="#2c2552"></GradientStop>
+                <GradientStop Color="#0a0a2f" Offset="1"></GradientStop>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <Label Content="Account owner"
+                   Foreground="White"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Name"
+                       Foreground="White"/>
+                <Label Content="{Binding LoginViewModel.Session.Account.OwnerName}"
+                       Foreground="White"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Surname"
+                       Foreground="White"/>
+                <Label Content="{Binding LoginViewModel.Session.Account.OwnerSurname}"
+                       Foreground="White"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Balance"
+                       Foreground="White"/>
+                <Label Content="{Binding LoginViewModel.Session.Account.Balance}"
+                       Foreground="White"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
