@@ -2,7 +2,7 @@
 
 namespace CashDispenserWinApp.ViewModels
 {
-    public abstract class NotifyModelView : INotifyPropertyChanged
+    public abstract class NotifyViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

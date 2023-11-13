@@ -1,12 +1,7 @@
-﻿using CashDispenserLibrary;
+﻿using CashDispenserLibrary.Core;
+using CashDispenserWinApp.ViewModels;
 using CashDispenserWinApp.Views;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Security.Policy;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace CashDispenserWinApp
@@ -21,9 +16,9 @@ namespace CashDispenserWinApp
             Bank bank = new("Privat24");
 
             bank.AccountManager.AddAccount(
-                new(1234_1234_1234_1234, 1111, "Dmitry", "Kalinovskyi", 100));
+                new(1234_1234_1234_1234, 1111, "Dmytro", "Kalinovskyi", 100));
             bank.AccountManager.AddAccount(
-                new(1111_2222_3333_4444, 1111, "Dmitry", "Moroz", 8888));
+                new(1111_2222_3333_4444, 1111, "Dmytro", "Moroz", 8888));
             bank.AccountManager.AddAccount(
                 new(1111_1111_1111_1111, 1111, "Andriy", "Morozov", 99999));
 
@@ -32,18 +27,57 @@ namespace CashDispenserWinApp
             return machine;
         }
 
-        private void BeginLoginSession()
-        {
-            LoginView loginView = new LoginView(GetMachine());
-            loginView.Show();
-        }
-
+        public static AutomatedTellerMachine WorkingMachine { get; private set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            Current.DispatcherUnhandledException += (sender, args) =>
+            {
+                // Handle the exception (log, display user-friendly message, etc.)
+                Exception exception = args.Exception;
+                MessageBox.Show($"An unhandled exception occurred: {exception.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                // Optionally, log the exception for debugging purposes
+            };
 
-            BeginLoginSession();
+
+            WorkingMachine = GetMachine();
+
+            Session.SessionStart += StartInteraction;
+            Session.SessionStart += EndLoginSession;
+
+            Session.SessionEnd += StartLoginSession;
+            Session.SessionEnd += EndInteraction;
+
+            StartLoginSession();
+
+        }
+
+        private LoginView? _loginView;
+        private MainWindow? _mainWindowView;
+
+        public void StartLoginSession()
+        {
+            _loginView = new LoginView(WorkingMachine);
+            _loginView.Show();
+        }
+
+        public void EndLoginSession()
+        {
+            _loginView?.Close();
+            _loginView = null;
+        }
+
+        public void StartInteraction()
+        {
+            _mainWindowView = new MainWindow((LoginViewModel)_loginView.DataContext);
+            _mainWindowView.Show();
+        }
+
+        public void EndInteraction()
+        {
+            _mainWindowView?.Close();
+            _mainWindowView = null;
         }
     }
 }

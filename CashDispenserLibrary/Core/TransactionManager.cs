@@ -1,7 +1,7 @@
 ﻿using CashDispenserLibrary.Exceptions;
 using CashDispenserLibrary.TransactionDetails;
 
-namespace CashDispenserLibrary
+namespace CashDispenserLibrary.Core
 {
     public class TransactionManager
     {
@@ -14,10 +14,12 @@ namespace CashDispenserLibrary
 
         internal void ProcessTransaction(PaymentDetails paymentDetails)
         {
-            if (paymentDetails.IsCompleted) throw new RepeatTransactionException("This transaction already processed!");
 
             try
             {
+                if (paymentDetails.IsCompleted) throw new RepeatTransactionException("This transaction already processed!");
+                if (paymentDetails.Amount < 0) throw new NegativeBalanceException("You can't pay negative amount of money!");
+                
                 Account from = _relatedBank.AccountManager.GetAccount(paymentDetails.FromAccountID),
                         to = _relatedBank.AccountManager.GetAccount(paymentDetails.ToAccountID);
 
@@ -38,9 +40,11 @@ namespace CashDispenserLibrary
 
         internal void ProcessTransaction(TopUpDetails topUpDetails)
         {
-            if (topUpDetails.IsCompleted) throw new RepeatTransactionException("This transaction already processed!");
             try
             {
+                if (topUpDetails.IsCompleted) throw new RepeatTransactionException("This transaction already processed!");
+                if (topUpDetails.Amount < 0) throw new NegativeBalanceException("You can't topup negative amount of money!");
+                
                 Account target = _relatedBank.AccountManager.GetAccount(topUpDetails.ToAccountID);
 
                 target.TopUp(topUpDetails.Amount);
@@ -55,10 +59,12 @@ namespace CashDispenserLibrary
 
         internal void ProcessTransaction(WithdrawDetails withdrawDetails)
         {
-            if (withdrawDetails.IsCompleted) throw new RepeatTransactionException("This transaction already processed!");
-
             try
             {
+                if (withdrawDetails.IsCompleted) throw new RepeatTransactionException("This transaction already processed!");
+
+                if (withdrawDetails.Amount < 0) throw new NegativeBalanceException("You can't withdraw negative amount of money!");
+
                 Account target = _relatedBank.AccountManager.GetAccount(withdrawDetails.FromAccountID);
 
                 target.Withdraw(withdrawDetails.Amount);

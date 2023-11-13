@@ -1,10 +1,10 @@
-﻿using CashDispenserLibrary;
+﻿using CashDispenserLibrary.Core;
 using CashDispenserWinApp.Models;
 using System;
 
 namespace CashDispenserWinApp.ViewModels
 {
-    public class LoginViewModel: NotifyModelView
+    public class LoginViewModel: NotifyViewModel
     {
         public LoginModel Model { get; private set; }
 
@@ -42,26 +42,26 @@ namespace CashDispenserWinApp.ViewModels
             }
         }
 
-        public delegate void LoginEvent(LoginViewModel sender, string message);
+        public delegate void LoginEventHandler(LoginViewModel sender, string message);
 
-        public event LoginEvent? LoginCompleted; 
-        public event LoginEvent? LoginFailed;
-
-        public Session? Session { get; private set; }
+        public event LoginEventHandler? LoginCompleted; 
+        public event LoginEventHandler? LoginFailed;
 
         public void StartSession()
         {
+            Session session;
             try
             {
-                Session = Machine.TryLogin(Model.CardID, Model.PIN);  
+                session = Machine.TryLogin(Model.CardID, Model.PIN);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LoginFailed?.Invoke(this, ex.Message);
                 return;
             }
 
             LoginCompleted?.Invoke(this, "Login completed!");
+            session.StartSession();
         }
     }
 }

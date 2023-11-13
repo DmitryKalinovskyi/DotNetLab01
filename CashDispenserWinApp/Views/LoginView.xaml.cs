@@ -1,18 +1,8 @@
-﻿using CashDispenserLibrary;
+﻿using CashDispenserLibrary.Core;
 using CashDispenserWinApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace CashDispenserWinApp.Views
 {
@@ -40,10 +30,6 @@ namespace CashDispenserWinApp.Views
         private void OnLoginCompleted(LoginViewModel sender, string message)
         {
             MessageBox.Show(message);
-
-            MainWindow window = new MainWindow(sender);
-            window.Show();
-            this.Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -10,6 +10,10 @@
   <ItemGroup>
     <None Remove="Images\card.png" />
     <None Remove="Images\credit-card.png" />
+    <None Remove="Images\icons8-home-96.png" />
+    <None Remove="Images\icons8-money-64.png" />
+    <None Remove="Images\icons8-withdraw-64.png" />
+    <None Remove="Images\money50x50.png" />
     <None Remove="Images\password.png" />
     <None Remove="Images\pin.png" />
   </ItemGroup>
@@ -20,6 +24,16 @@
 
   <ItemGroup>
     <Resource Include="Images\card.png" />
+    <Resource Include="Images\icons8-home-96.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\icons8-money-64.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\icons8-withdraw-64.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\money50x50.png" />
     <Resource Include="Images\pin.png" />
   </ItemGroup>
 

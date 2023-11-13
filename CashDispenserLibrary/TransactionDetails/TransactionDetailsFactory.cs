@@ -1,4 +1,6 @@
-﻿namespace CashDispenserLibrary.TransactionDetails
+﻿using CashDispenserLibrary.Core;
+
+namespace CashDispenserLibrary.TransactionDetails
 {
     /// <summary>
     /// Factory to make TransactionDetais, frindly-ineritable
@@ -8,8 +10,8 @@
     {
         private AutomatedTellerMachine _machine;
 
-        public event TransactionDetails.TransactionMessage? OnTransactionComplete;
-        public event TransactionDetails.TransactionMessage? OnTransactionFail;
+        public event TransactionDetails.TransactionEventHandler? OnTransactionComplete;
+        public event TransactionDetails.TransactionEventHandler? OnTransactionFail;
 
 
         public TransactionDetailsFactory(AutomatedTellerMachine machine)
@@ -21,8 +23,8 @@
         {
             PaymentDetails details = new(_machine.Bank, from, to, amount);
 
-            details.OnTransactionComplete += OnTransactionComplete;
-            details.OnTransactionFail += OnTransactionFail;
+            details.OnTransactionCompleted += OnTransactionComplete;
+            details.OnTransactionFailed += OnTransactionFail;
 
             return details;
         }
@@ -31,8 +33,8 @@
         {
             WithdrawDetails details = new(_machine.Bank, from, amount);
 
-            details.OnTransactionComplete += OnTransactionComplete;
-            details.OnTransactionFail += OnTransactionFail;
+            details.OnTransactionCompleted += OnTransactionComplete;
+            details.OnTransactionFailed += OnTransactionFail;
 
             return details;
         }
@@ -41,8 +43,8 @@
         {
             TopUpDetails details = new(_machine.Bank, to, amount);
 
-            details.OnTransactionComplete += OnTransactionComplete;
-            details.OnTransactionFail += OnTransactionFail;
+            details.OnTransactionCompleted += OnTransactionComplete;
+            details.OnTransactionFailed += OnTransactionFail;
 
             return details;
         }

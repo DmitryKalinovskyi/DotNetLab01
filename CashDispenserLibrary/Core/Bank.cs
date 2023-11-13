@@ -1,4 +1,4 @@
-﻿namespace CashDispenserLibrary
+﻿namespace CashDispenserLibrary.Core
 {
     /// <summary>
     /// Holds all basic information about bank and services related to it

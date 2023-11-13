@@ -4,9 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CashDispenserWinApp"
+        xmlns:views="clr-namespace:CashDispenserWinApp.Views"
+        xmlns:converters="clr-namespace:CashDispenserWinApp.Converters"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="800"
+        Title="Bank Violethut" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <converters:CardIDConvertor x:Key="CardIDConvertor"/>
+    </Window.Resources>
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
@@ -15,31 +20,101 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5 0" EndPoint="0.5 1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0" Color="#FF844FF6"></GradientStop>
+                        <GradientStop Offset="0.8" Color="#FF6624F4"></GradientStop>
+                        <GradientStop Offset="1" Color="#FF4519A3"></GradientStop>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <StackPanel VerticalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style x:Key="NavigateButttonStyle" TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF9765FA"/>
+                            </Trigger>
+                        </Style.Triggers>
+                        <Setter Property="Background" Value="Transparent"></Setter>
 
-        <StackPanel>
-            <Label Content="Account owner"
-                   Foreground="White"/>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Name"
-                       Foreground="White"/>
-                <Label Content="{Binding LoginViewModel.Session.Account.OwnerName}"
-                       Foreground="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            Width="160"
+                                            Height="30"
+                                            Margin="0 20 0 20"
+                                            HorizontalAlignment="Center"
+                                            CornerRadius="6"
+                                            >
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center">
+
+                                        </ContentPresenter>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                    <Style x:Key="NavigateButtonInnerText" TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontFamily" Value="Arial"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+                    
+                    <Style x:Key="NavigateButtonInnerIcon" TargetType="Image">
+                        <Setter Property="Width" Value="20"/>
+                        <Setter Property="Margin" Value="0 0 5 0"/>
+                        <Setter Property="Height" Value="20"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+                
+                </StackPanel.Resources>
+                <Button Style="{StaticResource NavigateButttonStyle}" Click="HomeButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Style="{StaticResource NavigateButtonInnerIcon}" Source="../Images/icons8-home-96.png"/>
+                        <TextBlock Style="{StaticResource NavigateButtonInnerText}">
+                            Home
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource NavigateButttonStyle}" Click="Withdraw_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Style="{StaticResource NavigateButtonInnerIcon}" Source="../Images/icons8-withdraw-64.png"/>
+                        <TextBlock Style="{StaticResource NavigateButtonInnerText}">
+                            Withdraw
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource NavigateButttonStyle}" Click="TopUpButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Style="{StaticResource NavigateButtonInnerIcon}" Source="../Images/icons8-money-64.png"/>
+                        <TextBlock Style="{StaticResource NavigateButtonInnerText}">
+                            Top up
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource NavigateButttonStyle}" Click="PayButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Style="{StaticResource NavigateButtonInnerIcon}" Source="../Images/card.png"/>
+                        <TextBlock Style="{StaticResource NavigateButtonInnerText}">
+                            Pay
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Surname"
-                       Foreground="White"/>
-                <Label Content="{Binding LoginViewModel.Session.Account.OwnerSurname}"
-                       Foreground="White"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Balance"
-                       Foreground="White"/>
-                <Label Content="{Binding LoginViewModel.Session.Account.Balance}"
-                       Foreground="White"/>
-            </StackPanel>
-        </StackPanel>
+        </Grid>
+
+        <ContentControl Grid.Column="1" Content="{Binding SelectedView, NotifyOnTargetUpdated=True}">
+        </ContentControl>
     </Grid>
 </Window>

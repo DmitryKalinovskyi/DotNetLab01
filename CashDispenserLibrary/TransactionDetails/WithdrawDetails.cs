@@ -1,4 +1,6 @@
-﻿namespace CashDispenserLibrary.TransactionDetails
+﻿using CashDispenserLibrary.Core;
+
+namespace CashDispenserLibrary.TransactionDetails
 {
     public class WithdrawDetails: TransactionDetails
     {

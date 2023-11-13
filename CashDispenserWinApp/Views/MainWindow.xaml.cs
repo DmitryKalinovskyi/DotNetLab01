@@ -1,4 +1,5 @@
 ﻿using CashDispenserWinApp.ViewModels;
+using CashDispenserWinApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,36 @@ namespace CashDispenserWinApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainWindowViewModel _viewModel;
+
         public MainWindow(LoginViewModel loginViewModel)
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel(loginViewModel);
+            _viewModel = new MainWindowViewModel(loginViewModel);
+            DataContext = _viewModel;
+
+            // initialize view page
+            _viewModel.SelectedView = new HomeView();
+        }
+
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.SelectedView = new HomeView();
+        }
+
+        private void Withdraw_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.SelectedView = new WithdrawView();
+        }
+
+        private void TopUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.SelectedView = new TopupView(_viewModel);
+        }
+
+        private void PayButton_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.SelectedView = new PayView();
         }
     }
 }

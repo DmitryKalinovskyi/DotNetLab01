@@ -1,6 +1,6 @@
 ﻿using CashDispenserLibrary.Exceptions;
 
-namespace CashDispenserLibrary
+namespace CashDispenserLibrary.Core
 {
     public class Account
     {

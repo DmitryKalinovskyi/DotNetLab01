@@ -52,7 +52,7 @@ Session RequestSession()
         {
             Console.WriteLine("Given card id not founded!");
         }
-        catch (AccountPINException e)
+        catch (AccountWrongPINException e)
         {
             Console.WriteLine("Entered wrong pin code!");
         }

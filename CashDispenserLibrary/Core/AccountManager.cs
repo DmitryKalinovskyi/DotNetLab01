@@ -1,6 +1,6 @@
 ﻿using CashDispenserLibrary.Exceptions;
 
-namespace CashDispenserLibrary
+namespace CashDispenserLibrary.Core
 {
     public class AccountManager
     {
@@ -33,7 +33,7 @@ namespace CashDispenserLibrary
             Account account = _accounts[accountID];
 
             if (account.ComparePIN(pin) == false)
-                throw new AccountPINException("Wrong pincode!");
+                throw new AccountWrongPINException("Wrong pincode!");
 
             return account;
         }
