@@ -1,7 +1,5 @@
 ﻿using CashDispenserLibrary.Core;
 using CashDispenserLibrary.Exceptions;
-using System;
-using System.Diagnostics;
 
 namespace CashDispenserWinApp.ViewModels
 {

@@ -1,6 +1,5 @@
 ﻿using CashDispenserLibrary.TransactionDetails;
 using System;
-using System.Windows;
 using static CashDispenserLibrary.TransactionDetails.TransactionDetails;
 
 namespace CashDispenserWinApp.ViewModels

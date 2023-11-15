@@ -24,12 +24,12 @@ namespace CashDispenserWinApp.Views
 
         private void OnLoginFail(LoginViewModel sender, string message)
         {
-            MessageBox.Show(message);
+            MessageBox.Show(message, "Login failed", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void OnLoginCompleted(LoginViewModel sender, string message)
         {
-            MessageBox.Show(message);
+            MessageBox.Show(message, "Login completed", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

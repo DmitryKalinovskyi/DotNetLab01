@@ -1,6 +1,5 @@
 ﻿using CashDispenserLibrary.Exceptions;
 using CashDispenserLibrary.TransactionDetails;
-using System.Transactions;
 
 namespace CashDispenserLibrary.Core
 {

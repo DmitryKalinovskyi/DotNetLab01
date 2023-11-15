@@ -4,7 +4,7 @@ namespace CashDispenserLibrary.Core
 {
     public class AccountManager
     {
-        public event EventHandler<AuthenticateEventArgs> UserAuthenticated;
+        public event EventHandler<AuthenticateEventArgs>? UserAuthenticated;
 
         private Dictionary<long, Account> _accounts;
 
@@ -38,7 +38,7 @@ namespace CashDispenserLibrary.Core
             if (account.ComparePIN(pin) == false)
                 throw new AccountWrongPINException("Wrong pincode!");
 
-            UserAuthenticated(this, new(account));
+            UserAuthenticated?.Invoke(this, new(account));
 
             return account;
         }
