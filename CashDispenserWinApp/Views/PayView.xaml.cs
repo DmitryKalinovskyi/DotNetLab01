@@ -35,7 +35,7 @@ namespace CashDispenserWinApp.Views
 
         private void _DecorateViewModel()
         {
-            _viewModel.OnTransactionCompleted += (s, args) => MessageBox.Show(args.Message, "Transaction information", MessageBoxButton.OK);
+            _viewModel.OnTransactionCompleted += (s, args) => MessageBox.Show(args.Message, "Transaction information", MessageBoxButton.OK, MessageBoxImage.Information);
             _viewModel.OnTransactionFailed += (s, args) => MessageBox.Show(args.Message, "Transaction information", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 

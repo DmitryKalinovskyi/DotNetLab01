@@ -1,9 +1,4 @@
 ﻿using CashDispenserConsole.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CashDispenserConsole
 {
@@ -32,6 +27,5 @@ namespace CashDispenserConsole
         {
             return "Command list: \n" + string.Join("\n\n---------------------\n", _avaibleCommands.Values.Select(cmd => cmd.CommandInfo));
         }
-
     }
 }

@@ -28,7 +28,7 @@ namespace CashDispenserLibrary.Core
 
         public Session TryLogin(long cardID, int pin)
         {
-            Account account = Bank.AccountManager.RetriveAccount(cardID, pin);
+            Account account = Bank.AccountManager.AuthenticateAccount(cardID, pin);
 
             return new(this, account);
         }

@@ -46,7 +46,7 @@ namespace CashDispenserWinApp
 
         private void TopUpButton_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.SelectedView = new TopupView(_viewModel);
+            _viewModel.SelectedView = new TopupView();
         }
 
         private void PayButton_Click(object sender, RoutedEventArgs e)

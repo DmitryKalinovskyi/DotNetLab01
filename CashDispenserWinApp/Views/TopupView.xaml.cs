@@ -22,12 +22,10 @@ namespace CashDispenserWinApp.Views
     public partial class TopupView : UserControl
     {
         private TopUpViewModel _viewModel;
-        private MainWindowViewModel _mainWindowsViewModel;
 
-        public TopupView(MainWindowViewModel mainWindowViewModel)
+        public TopupView()
         {
             InitializeComponent();
-            _mainWindowsViewModel = mainWindowViewModel;
             _viewModel = new();
 
             DataContext = _viewModel;
@@ -37,15 +35,13 @@ namespace CashDispenserWinApp.Views
 
         private void _DecorateViewModel()
         {
-            _viewModel.OnTransactionCompleted += (s, args) => MessageBox.Show(args.Message, "Transaction information", MessageBoxButton.OK);
+            _viewModel.OnTransactionCompleted += (s, args) => MessageBox.Show(args.Message, "Transaction information", MessageBoxButton.OK, MessageBoxImage.Information);
             _viewModel.OnTransactionFailed += (s, args) => MessageBox.Show(args.Message, "Transaction information", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void TopUpButton_Click(object sender, RoutedEventArgs e)
         {
             _viewModel.TryMakeTransaction();
-
-            // depends from result, show message
         }
     }
 }

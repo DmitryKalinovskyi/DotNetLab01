@@ -4,9 +4,12 @@ namespace CashDispenserLibrary.Core
 {
     public class AccountManager
     {
+        public event EventHandler<AuthenticateEventArgs> UserAuthenticated;
+
         private Dictionary<long, Account> _accounts;
 
         private readonly Bank _relatedBank;
+
 
         public AccountManager(Bank bank)
         {
@@ -25,7 +28,7 @@ namespace CashDispenserLibrary.Core
             _accounts.Add(account.CardID, account);
         }
 
-        internal Account RetriveAccount(long accountID, int pin)
+        internal Account AuthenticateAccount(long accountID, int pin)
         {
             if (_accounts.ContainsKey(accountID) == false) 
                 throw new AccountNotFoundException("Wrong account id!");
@@ -34,6 +37,8 @@ namespace CashDispenserLibrary.Core
 
             if (account.ComparePIN(pin) == false)
                 throw new AccountWrongPINException("Wrong pincode!");
+
+            UserAuthenticated(this, new(account));
 
             return account;
         }
